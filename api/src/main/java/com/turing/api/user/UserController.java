@@ -2,6 +2,7 @@ package com.turing.api.user;
 
 
 import com.turing.api.enums.Messenger;
+import com.turing.api.proxy.TypeProxy;
 import lombok.NoArgsConstructor;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
@@ -27,10 +28,22 @@ public class UserController {
 
         return response;
     }
-    public Map<String, ?> join(@RequestBody Map<?,?> paramap) throws SQLException {
-        Map<String,String> response = new HashMap<>();
 
-        return response;
+    @PostMapping("/join")
+    public Map<String, ?> join(@RequestBody Map<?,?> paramap) throws SQLException {
+        Map<String, User> map = new HashMap<>();
+        System.out.println("입력받은 아이디 : " + paramap.get("username"));
+        User user = User.builder()
+                .username((String) paramap.get("username"))
+                .password((String) paramap.get("password"))
+                .name((String) paramap.get("name"))
+                .job((String) paramap.get("job"))
+                .phone((String) paramap.get("phone"))
+                .height(TypeProxy.doubleOf.apply((String)paramap.get("height")))
+                .weight(TypeProxy.doubleOf.apply((String)paramap.get("weight")))
+                .build();
+        map.put("회원가입 성공", user);
+        return map;
     }
 
     public Map<String, ?> login(@RequestBody Map<?,?> paramap) throws SQLException {

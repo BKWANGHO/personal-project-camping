@@ -1,14 +1,18 @@
 package com.turing.api.user;
 
+import jakarta.persistence.*;
 import lombok.*;
 
 
     @NoArgsConstructor(access = AccessLevel.PROTECTED)
     @Getter
     @ToString(exclude = {"id"})
-
+@Entity(name = "personal_users")
 public class User {
 
+        @Id
+        @GeneratedValue(strategy = GenerationType.IDENTITY)
+        @Column(name = "user_id")
         private Long id;
         private String username;
         private String password;
