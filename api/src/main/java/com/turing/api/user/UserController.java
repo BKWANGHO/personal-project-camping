@@ -17,10 +17,8 @@ public class UserController {
 
     private final UserService service;
 
-
-
     @PostMapping("/login")
-    public Map<String, ?> login1 (@RequestBody Map<?,?> paramap){
+    public Map<String, ?> login (@RequestBody Map<?,?> paramap){
         String username = (String)paramap.get("username");
         System.out.println("리퀘스트" + username);
         Map<String,String> response = new HashMap<>();
@@ -46,10 +44,6 @@ public class UserController {
         return map;
     }
 
-    public Map<String, ?> login(@RequestBody Map<?,?> paramap) throws SQLException {
-        Map<String,String> response = new HashMap<>();
-        return response;
-    }
 
     public Map<String, ?> findUserBYId(@RequestBody Map<?,?> paramap) {
         Map<String,String> response = new HashMap<>();
